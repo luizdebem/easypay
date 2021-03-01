@@ -13,7 +13,16 @@ class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormBuilderState>();
 
   void submitData() async {
-    print("Submitasso");
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      try {
+        // ...
+      } catch (e) {
+        // ...
+      }
+    } else {
+      return;
+    }
   }
 
   @override
@@ -85,6 +94,21 @@ class _SignupState extends State<Signup> {
                     ),
                     FormBuilderDateTimePicker(
                         name: "bornDate",
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(context,
+                              errorText: "Campo obrigatório."),
+                          (DateTime birthDate) {
+                            final today = DateTime.now();
+                            final minimum = DateTime(
+                                today.year - 18, today.month, today.day);
+                            if (birthDate.isAfter(minimum)) {
+                              return "Você precisa ter 18 anos para criar uma conta.";
+                            } else {
+                              return null;
+                            }
+                          }
+                        ]),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           labelText: "Data de nascimento",
                         ),
@@ -116,7 +140,7 @@ class _SignupState extends State<Signup> {
                       height: 30.0,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => submitData(),
                       child: Text("Cadastrar!"),
                     )
                   ],
