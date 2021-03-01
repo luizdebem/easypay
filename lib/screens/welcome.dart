@@ -1,3 +1,4 @@
+import 'package:easyPay/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -28,7 +29,7 @@ class Welcome extends StatelessWidget {
               ),
               ElevatedButton(
                 child: Text("Criar uma conta"),
-                onPressed: () {},
+                onPressed: () => Navigator.pushNamed(context, Signup.routeName),
               )
             ],
           ),

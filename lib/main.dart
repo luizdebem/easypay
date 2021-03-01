@@ -1,3 +1,4 @@
+import 'package:easyPay/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         initialRoute: Welcome.routeName,
         routes: {
           Welcome.routeName: (context) => Welcome(),
+          Signup.routeName: (context) => Signup(),
           Home.routeName: (context) => Home(),
         });
   }
